@@ -1,17 +1,17 @@
 # Termux Plus
 
-A modular, interactive development environment for [Termux](https://termux.dev/) on Android.
+A modular, interactive development environment for Termux on Android.
 
 Termux Plus provides an optional collection of development toolchains, Neovim, Xfce4/Termux:X11, networking and server software, graphics libraries, Python tooling, QEMU, and desktop applications.
 
-The installation is **modular**: you choose what you want to install instead of installing the entire environment.
+The installation is modular: you choose what you want to install instead of installing the entire environment.
 
 ## Highlights
 
-- Interactive `dialog`-based installer
+- Interactive dialog-based installer
 - Select only the components you need
 - C/C++ and LLVM development
-- Python, `uv`, Django, Flask, Jupyter, Meson, and Maturin
+- Python, uv, Django, Flask, Jupyter, Meson, and Maturin
 - Rust, Go, Node.js, Java, Perl, and PHP
 - Neovim + NvChad with repository-provided configuration
 - Zsh + Oh My Zsh + Powerlevel10k
@@ -19,16 +19,24 @@ The installation is **modular**: you choose what you want to install instead of 
 - Apache, Nginx, Gitea, and networking tools
 - QEMU x86-64 emulation
 - SDL2, GLFW, GLEW, GLM, Mesa, and OpenCV
-- Repository-provided fonts, themes, icons, cursor, and wallpaper
+- Repository-provided fonts, themes, icons, cursor, wallpaper, and desktop configurations (Xfce4, Plank, Eww)
+
+## Screenshots
+
+![Screenshot 1](screenshots/screenshot1.png)
+
+![Screenshot 2](screenshots/screenshot2.png)
+
+![Screenshot 3](screenshots/screenshot3.png)
 
 ## Requirements
 
 - Android device with Termux installed
 - Internet connection
 - Sufficient storage for the components you select
-- At least **12 GB free space** is recommended for a large/full installation
+- At least 12 GB free space is recommended for a large/full installation
 
-> This project is designed for Termux. It does not require a Linux distribution running through `proot`.
+> This project is designed for Termux. It does not require a Linux distribution running through proot.
 
 ## Installation
 
@@ -43,14 +51,14 @@ chmod +x scripts/install.sh
 
 The installer will automatically install `dialog` if it is not already installed.
 
-### Selecting components
+## Selecting components
 
-The installer opens a checklist. Press **Space** to select or deselect an item, then press **Enter** to continue.
+The installer opens a checklist. Press `Space` to select or deselect an item, then press `Enter` to continue.
 
 Available component groups include:
 
 | Component | Installs |
-|---|---|
+| --- | --- |
 | Basic utilities | Git, curl, wget, unzip, tar |
 | Termux repositories | TUR and Termux:X11 repositories |
 | Zsh | Zsh, Oh My Zsh, Powerlevel10k, syntax highlighting, font |
@@ -58,18 +66,18 @@ Available component groups include:
 | Node.js | Node.js and npm |
 | Debugging | LLDB, GDB, strace, ldd, Rizin |
 | Build tools | CMake, Make, Ninja, Autotools, pkg-config |
-| Python | Python and `uv` |
+| Python | Python and uv |
 | Go | Go toolchain |
 | Rust | Rust toolchain |
 | Development utilities | GitHub CLI, NASM, libtool, CPIO, and related tools |
 | Java | OpenJDK 21 |
 | Perl + PHP | Perl and PHP |
-| Language servers | `neocmakelsp`, `asm-lsp`, Pyrefly, Ruff |
+| Language servers | neocmakelsp, asm-lsp, Pyrefly, Ruff |
 | Neovim | Neovim, NvChad starter, and project configuration |
 | Desktop | Xfce4, Termux:X11, Firefox, VLC, GIMP, LibreOffice, and others |
 | Graphical tools | GHex and JADX |
 | Networking | Apache, Nginx, Gitea, and networking utilities |
-| CLI tools | `fzf`, `tmux`, `bat`, `fd`, `lsd`, `fastfetch`, `yt-dlp`, and others |
+| CLI tools | fzf, tmux, bat, fd, lsd, fastfetch, yt-dlp, and others |
 | Graphics | Mesa, SDL2, GLFW, GLEW, GLM, OpenCV |
 | QEMU | x86-64 system and user emulation |
 | Python libraries | NumPy, Pandas, Matplotlib, psutil, Tkinter |
@@ -77,7 +85,7 @@ Available component groups include:
 | Jupyter | Jupyter, JupyterLab LSP, Ruff integration |
 | Python build | Meson and Maturin |
 | Termux configuration | Project `termux.properties` |
-| Xfce configuration | Project themes, icons, cursor, and wallpaper |
+| Xfce configuration | Project themes, icons, cursor, wallpaper, and desktop configurations (Xfce4, Plank, Eww, autostart) |
 | Font | Repository font installed system-wide |
 | Startup | Shell variables, aliases, MOTD handling, and directories |
 | Cleanup | APT, pip, and npm cache cleanup |
@@ -85,7 +93,7 @@ Available component groups include:
 
 ## Repository Structure
 
-```text
+```
 .
 ├── LICENSE
 ├── README.md
@@ -100,11 +108,20 @@ Available component groups include:
 │   └── wallpaper
 │       └── wallpaper.jpg
 ├── configs
+│   ├── desktop
+│   │   ├── autostart.tar
+│   │   ├── eww.tar
+│   │   ├── plank.tar
+│   │   └── xfce4.tar
 │   ├── neovim
 │   │   ├── init.lua
 │   │   └── lspconfig.lua
 │   └── termux
 │       └── termux.properties
+├── screenshots
+│   ├── screenshot1.png
+│   ├── screenshot2.png
+│   └── screenshot3.png
 └── scripts
     └── install.sh
 ```
@@ -127,13 +144,18 @@ Contains the custom resources used by the setup:
 
 Contains configuration files installed by the script:
 
+- Desktop configuration archives (Xfce4, Plank, Eww, and autostart)
 - Neovim configuration
 - Neovim LSP configuration
 - Termux properties
 
+### `screenshots/`
+
+Contains the preview screenshots shown in this README.
+
 ### `scripts/install.sh`
 
-The interactive installer. It handles package installation, configuration deployment, and optional cleanup based on the selections made in the `dialog` interface.
+The interactive installer. It handles package installation, configuration deployment, and optional cleanup based on the selections made in the dialog interface.
 
 ## Neovim
 
@@ -158,9 +180,16 @@ Tree-sitter parsers can then be installed from inside Neovim, for example:
 
 ## Desktop Environment
 
-The desktop portion uses **Xfce4 with Termux:X11**. It is optional and can be skipped completely from the installer.
+The desktop portion uses Xfce4 with Termux:X11. It is optional and can be skipped completely from the installer.
 
-When Xfce configuration is selected, the installer uses the resources stored in `assets/` instead of downloading them separately.
+When Xfce configuration is selected, the installer uses the resources stored in `assets/` and `configs/desktop/` instead of downloading them separately.
+
+The archives in `configs/desktop/` are:
+
+- `xfce4.tar`: Xfce4 settings
+- `plank.tar`: Plank dock configuration
+- `eww.tar`: Eww widget configuration
+- `autostart.tar`: autostart entries
 
 ## Configuration After Installation
 
@@ -188,7 +217,7 @@ exec zsh
 
 Installation output is written to:
 
-```text
+```
 $HOME/termux-plus-install.log
 ```
 
@@ -213,4 +242,4 @@ apt update && apt upgrade -y
 
 ## License
 
-See [`LICENSE`](LICENSE).
+See [LICENSE](LICENSE).
