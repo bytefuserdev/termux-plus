@@ -1,1 +1,0 @@
-fix the installer of eww congig
